@@ -178,7 +178,8 @@ fi
 echo "=========================================="
 print_success "All checks passed!"
 echo "=========================================="
-print_info "Starting Laravel development server on 0.0.0.0:8001..."
+print_info "Starting PHP-FPM..."
+print_info "Nginx will handle HTTP requests and forward PHP requests to PHP-FPM"
 print_info "Logs will be visible in Docker logs."
 print_info "To view logs, run: docker-compose logs -f digitalhub_app"
 print_info "Or: docker logs -f digitalhub_app"
@@ -188,8 +189,7 @@ echo "=========================================="
 export LOG_CHANNEL=${LOG_CHANNEL:-stderr}
 export LOG_LEVEL=${LOG_LEVEL:-debug}
 
-# Start Laravel's built-in server
-# The server will output all requests and errors to stdout/stderr
-# Using exec to replace shell process and ensure logs are visible
-exec php artisan serve --host=0.0.0.0 --port=8001
+# Start PHP-FPM in foreground mode
+# This will handle PHP requests from nginx
+exec php-fpm -F
 
