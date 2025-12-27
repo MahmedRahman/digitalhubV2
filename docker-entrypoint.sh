@@ -191,5 +191,5 @@ export LOG_LEVEL=${LOG_LEVEL:-debug}
 # Start Laravel's built-in server
 # The server will output all requests and errors to stdout/stderr
 # Using exec to replace shell process and ensure logs are visible
-exec php artisan serve --host=0.0.0.0 --port=8000
+exec php artisan serve --host=0.0.0.0 --port=8001
 
