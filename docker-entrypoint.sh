@@ -189,6 +189,10 @@ echo "=========================================="
 export LOG_CHANNEL=${LOG_CHANNEL:-stderr}
 export LOG_LEVEL=${LOG_LEVEL:-debug}
 
+
+php artisan storage:link || true
+exec "$@"
+
 # Start PHP-FPM in foreground mode
 # This will handle PHP requests from nginx
 exec php-fpm -F
