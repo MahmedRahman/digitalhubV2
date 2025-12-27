@@ -41,7 +41,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Expose port 8000 for Laravel development server
-EXPOSE 8000
+EXPOSE 8001
 
 # Set entrypoint
 ENTRYPOINT ["/bin/bash", "/usr/local/bin/docker-entrypoint.sh"]
