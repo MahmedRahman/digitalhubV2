@@ -758,12 +758,22 @@ class HomepageEditor {
         saveBtn.disabled = true;
         
         try {
+            // Get CSRF token from meta tag
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+            
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            };
+            
+            // Add CSRF token if available
+            if (csrfToken) {
+                headers['X-CSRF-TOKEN'] = csrfToken;
+            }
+            
             const response = await fetch('/api/homepage-content/update', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
-                },
+                headers: headers,
                 body: JSON.stringify({ content: this.content })
             });
             
@@ -1040,11 +1050,21 @@ HomepageEditor.prototype.setupImageUpload = function(element, sectionKey) {
         formData.append('field', field);
         
         try {
+            // Get CSRF token from meta tag
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+            
+            const headers = {
+                'Accept': 'application/json'
+            };
+            
+            // Add CSRF token if available
+            if (csrfToken) {
+                headers['X-CSRF-TOKEN'] = csrfToken;
+            }
+            
             const response = await fetch('/api/homepage-content/upload-image', {
                 method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
-                },
+                headers: headers,
                 body: formData
             });
             

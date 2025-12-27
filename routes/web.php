@@ -114,17 +114,3 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
     Route::post('/contact/update', [App\Http\Controllers\ContactContentController::class, 'update'])->name('contact.update');
 });
 
-// API Routes for Homepage Content
-Route::prefix('api')->name('api.')->group(function () {
-    Route::get('/homepage-content', [App\Http\Controllers\HomepageContentController::class, 'getContent'])->name('homepage-content.get');
-    Route::post('/homepage-content/update', [App\Http\Controllers\HomepageContentController::class, 'update'])->name('homepage-content.update');
-    Route::post('/homepage-content/upload-image', [App\Http\Controllers\HomepageContentController::class, 'uploadImage'])->name('homepage-content.upload-image');
-    
-    // API Routes for About Page Content
-    Route::get('/about-content', [App\Http\Controllers\AboutContentController::class, 'getContent'])->name('about-content.get');
-    Route::post('/about-content/update', [App\Http\Controllers\AboutContentController::class, 'update'])->name('about-content.update');
-    
-    // API Routes for Contact Page Content
-    Route::get('/contact-content', [App\Http\Controllers\ContactContentController::class, 'getContent'])->name('contact-content.get');
-    Route::post('/contact-content/update', [App\Http\Controllers\ContactContentController::class, 'update'])->name('contact-content.update');
-});
