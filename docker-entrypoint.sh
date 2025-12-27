@@ -178,10 +178,10 @@ fi
 echo "=========================================="
 print_success "All checks passed!"
 echo "=========================================="
-print_info "Starting Laravel development server on 0.0.0.0:8000..."
+print_info "Starting Laravel development server on 0.0.0.0:8001..."
 print_info "Logs will be visible in Docker logs."
-print_info "To view logs, run: docker-compose logs -f app"
-print_info "Or: docker logs -f labeltech_app"
+print_info "To view logs, run: docker-compose logs -f digitalhub_app"
+print_info "Or: docker logs -f digitalhub_app"
 echo "=========================================="
 
 # Ensure Laravel logs go to stderr for Docker visibility
