@@ -1,0 +1,219 @@
+/* Arabic Fonts - Tajawal for all text (with heavier weights for clarity) */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800&display=swap');
+
+@import 'tailwindcss';
+
+@theme {
+  /* Core Brand Colors */
+  --color-primary: #04c2eb;
+  --color-secondary: #F16B78;
+  
+  /* Neutral Colors */
+  --color-textDark: #111111;
+  --color-textMuted: #6B6F73;
+  --color-bgSoft: #F5F6F7;
+  --color-white: #FFFFFF;
+  
+  /* Tints for backgrounds (using opacity) */
+  --color-primary-tint-light: rgba(4, 194, 235, 0.08);
+  --color-primary-tint-medium: rgba(4, 194, 235, 0.12);
+  --color-secondary-tint: rgba(241, 107, 120, 0.08);
+}
+
+/* Base Styles */
+@layer base {
+  html {
+    @apply scroll-smooth;
+    direction: rtl;
+  }
+
+  body {
+    @apply text-textDark bg-white;
+    font-family: 'Tajawal', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    font-family: 'Tajawal', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* RTL Support for numbers and English text */
+  [dir="rtl"] .ltr {
+    direction: ltr;
+    display: inline-block;
+  }
+
+  /* Selection color */
+  ::selection {
+    background-color: rgba(4, 194, 235, 0.3);
+    color: var(--color-textDark);
+  }
+
+  /* Smooth transitions */
+  * {
+    @apply transition-colors duration-200;
+  }
+}
+
+/* Custom Components */
+@layer components {
+  /* Button Styles */
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    @apply px-6 py-3 rounded-xl focus:outline-none transition-all duration-200;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(4, 194, 235, 0.2);
+  }
+
+  .btn-primary:hover {
+    background-color: rgba(4, 194, 235, 0.9);
+    box-shadow: 0 4px 6px rgba(4, 194, 235, 0.3);
+  }
+
+  .btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(4, 194, 235, 0.3);
+  }
+
+  .btn-secondary {
+    background-color: var(--color-white);
+    color: var(--color-textDark);
+    border: 2px solid var(--color-textMuted);
+    @apply px-6 py-3 rounded-xl focus:outline-none transition-all duration-200;
+    font-weight: 600;
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-bgSoft);
+  }
+
+  .btn-secondary:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(107, 111, 115, 0.2);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: var(--color-textDark);
+    border: 2px solid var(--color-textMuted);
+    @apply px-6 py-3 rounded-xl focus:outline-none transition-all duration-200;
+    font-weight: 600;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-bgSoft);
+  }
+
+  .btn-outline:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(107, 111, 115, 0.2);
+  }
+
+  /* Card Styles */
+  .card {
+    background-color: var(--color-white);
+    border: 2px solid #111111;
+    @apply rounded-2xl p-6;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Course Card - Flat Design */
+  .course-card {
+    /* No hover effects, no transitions */
+  }
+
+  /* Active Tab Style */
+  .category-tab.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+  }
+
+  /* Line Clamp Utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* RTL Specific Adjustments */
+  [dir="rtl"] .space-x-reverse > * + * {
+    margin-right: 0;
+    margin-left: var(--tw-space-x-reverse, 0);
+  }
+
+  /* Prose Styles for Blog Content */
+  .prose {
+    color: var(--color-textMuted);
+  }
+
+  .prose h2 {
+    color: var(--color-textDark);
+    @apply text-2xl mt-8 mb-4;
+    font-family: 'Tajawal', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .prose h3 {
+    color: var(--color-textDark);
+    @apply text-xl mt-6 mb-3;
+    font-family: 'Tajawal', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+  .prose p {
+    @apply mb-4 leading-relaxed;
+    font-weight: 500;
+  }
+
+  .prose ul {
+    @apply list-disc list-inside space-y-2 mb-4;
+  }
+
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  .prose a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    opacity: 0.8;
+  }
+
+  /* Accordion Styles */
+  .accordion-item {
+    @apply overflow-hidden;
+  }
+
+  .accordion-item button {
+    @apply cursor-pointer;
+  }
+
+  .accordion-item [role="region"] {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    overflow: hidden;
+  }
+
+  .accordion-item [role="region"] > div {
+    @apply pt-4;
+  }
+
+  .accordion-item svg {
+    transition: transform 0.3s ease-out;
+  }
+}
+
