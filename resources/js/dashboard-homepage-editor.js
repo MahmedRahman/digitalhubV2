@@ -774,8 +774,24 @@ class HomepageEditor {
             const response = await fetch('/api/homepage-content/update', {
                 method: 'POST',
                 headers: headers,
-                body: JSON.stringify({ content: this.content })
+                body: JSON.stringify({ content: this.content }),
+                credentials: 'same-origin'
             });
+            
+            // Check if response is OK
+            if (!response.ok) {
+                // If 419, try to get new CSRF token
+                if (response.status === 419) {
+                    console.error('CSRF token mismatch. Please refresh the page.');
+                    alert('انتهت صلاحية الجلسة. يرجى تحديث الصفحة والمحاولة مرة أخرى.');
+                    return;
+                }
+                
+                // Try to parse error response
+                const errorText = await response.text();
+                console.error('Server error:', response.status, errorText);
+                throw new Error(`Server error: ${response.status}`);
+            }
             
             const result = await response.json();
             
