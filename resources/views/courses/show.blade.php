@@ -100,8 +100,14 @@
                             محتوى الكورس
                         </h2>
                         <div class="space-y-2" id="curriculum-accordion">
-                            @if(isset($course['course_outline']) && is_array($course['course_outline']))
+                            @if(isset($course['course_outline']) && is_array($course['course_outline']) && count($course['course_outline']) > 0)
                                 @foreach($course['course_outline'] as $index => $section)
+                                    @php
+                                        $lessonsCount = 0;
+                                        if (isset($section) && is_array($section) && isset($section['lessons']) && is_array($section['lessons'])) {
+                                            $lessonsCount = count($section['lessons']);
+                                        }
+                                    @endphp
                                 <div class="accordion-item border-2 rounded-lg overflow-hidden" style="border-color: #E5E7EB; background-color: #F9FAFB;">
                                     <button 
                                         class="w-full flex items-center justify-between text-right p-4 focus:outline-none"
@@ -113,10 +119,10 @@
                                     >
                                         <div class="flex-1 text-right">
                                             <h3 class="font-heading font-bold text-lg mb-1 text-textDark">
-                                                {{ $section['title'] ?? 'قسم بدون عنوان' }}
+                                                {{ isset($section['title']) ? $section['title'] : 'قسم بدون عنوان' }}
                                             </h3>
                                             <p class="text-sm text-textMuted">
-                                                {{ isset($section['lessons']) && is_array($section['lessons']) ? count($section['lessons']) : 0 }} دروس
+                                                {{ $lessonsCount }} دروس
                                             </p>
                                         </div>
                                         <svg 
