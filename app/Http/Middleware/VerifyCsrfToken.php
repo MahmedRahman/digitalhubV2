@@ -46,5 +46,22 @@ class VerifyCsrfToken extends Middleware
         
         return parent::inExceptArray($request);
     }
+    
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, \Closure $next)
+    {
+        // Skip CSRF verification for ALL API routes
+        if ($request->is('api/*')) {
+            return $next($request);
+        }
+        
+        return parent::handle($request, $next);
+    }
 }
 

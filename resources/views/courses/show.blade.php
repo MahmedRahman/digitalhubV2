@@ -113,10 +113,10 @@
                                     >
                                         <div class="flex-1 text-right">
                                             <h3 class="font-heading font-bold text-lg mb-1 text-textDark">
-                                                {{ $section['title'] }}
+                                                {{ $section['title'] ?? 'قسم بدون عنوان' }}
                                             </h3>
                                             <p class="text-sm text-textMuted">
-                                                {{ count($section['lessons']) }} دروس
+                                                {{ isset($section['lessons']) && is_array($section['lessons']) ? count($section['lessons']) : 0 }} دروس
                                             </p>
                                         </div>
                                         <svg 
@@ -137,17 +137,23 @@
                                         style="max-height: 0; opacity: 0;"
                                     >
                                         <div class="px-4 pt-4 pb-4 space-y-2" style="background-color: #FFFFFF;">
-                                            @foreach($section['lessons'] as $lessonIndex => $lesson)
-                                                <div class="flex items-center justify-between p-3 rounded border" style="background-color: #F5F6F7; border-color: #E5E7EB;">
-                                                    <div class="flex items-center gap-3">
-                                                        <div class="w-8 h-8 rounded flex items-center justify-center text-sm font-medium" style="background-color: rgba(4, 194, 235, 0.12); color: #04c2eb;">
-                                                            {{ $lessonIndex + 1 }}
+                                            @if(isset($section['lessons']) && is_array($section['lessons']) && count($section['lessons']) > 0)
+                                                @foreach($section['lessons'] as $lessonIndex => $lesson)
+                                                    <div class="flex items-center justify-between p-3 rounded border" style="background-color: #F5F6F7; border-color: #E5E7EB;">
+                                                        <div class="flex items-center gap-3">
+                                                            <div class="w-8 h-8 rounded flex items-center justify-center text-sm font-medium" style="background-color: rgba(4, 194, 235, 0.12); color: #04c2eb;">
+                                                                {{ $lessonIndex + 1 }}
+                                                            </div>
+                                                            <span class="font-medium text-textDark">{{ $lesson['title'] ?? 'درس بدون عنوان' }}</span>
                                                         </div>
-                                                        <span class="font-medium text-textDark">{{ $lesson['title'] }}</span>
+                                                        <span class="text-sm text-textMuted">{{ $lesson['duration'] ?? '' }}</span>
                                                     </div>
-                                                    <span class="text-sm text-textMuted">{{ $lesson['duration'] }}</span>
+                                                @endforeach
+                                            @else
+                                                <div class="text-center py-4 text-textMuted">
+                                                    <p class="text-sm">لا توجد دروس متاحة في هذا القسم</p>
                                                 </div>
-                                            @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
